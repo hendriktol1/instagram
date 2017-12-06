@@ -83,7 +83,7 @@
                 <div class="title m-b-md">
 
                 </div>
-
+                {{-- {{dd($string)}} --}}
                 <div class="links">
                     <a id="js-getdata">Documentation</a>
                     <a href="https://www.instagram.com/oauth/authorize/?client_id=55cc1ce217eb43f7a8328d3bee0f3fec&redirect_uri=http://localhost:8089&response_type=token">Laracasts</a>
@@ -91,6 +91,7 @@
                     <a id="js-getlogin">Forge</a>
                     <a id="js-getcode">GitHub</a>
                 </div>
+                {{ csrf_field() }}
             </div>
         </div>
         <script>
@@ -117,11 +118,10 @@
 
         function gettokenbypost(){
            $.ajax({
-             type: 'POST',
              url: "http://localhost:8089/authenticate",
 
              data: {
-                '_token': {{ csrf_field() }},
+                '_token': $('[name="somenamehere"]').val(),
                 'code': getcodefromurl(),
 
              },
@@ -161,17 +161,7 @@
         }
 
         function getlogin(){
-           $.ajax({
-             url: "https://api.instagram.com/oauth/authorize/?client_id=55cc1ce217eb43f7a8328d3bee0f3fec&redirect_uri=http://localhost:8089&response_type=code",
-             dataType: 'html',
-             error: function(){
-                console.log("no response");
-             },
-             success: function(data) {
-                var container = $('#content');
-                console.log(data);
-             }
-          });
+           window.location.href = "https://api.instagram.com/oauth/authorize/?client_id=55cc1ce217eb43f7a8328d3bee0f3fec&redirect_uri=http://localhost:8089&response_type=code";
         }
 
         </script>

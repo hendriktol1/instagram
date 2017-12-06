@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'InstagramController@index');
+Route::get('/user', 'InstagramController@home');
