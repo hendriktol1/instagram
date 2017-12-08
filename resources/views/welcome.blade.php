@@ -92,6 +92,10 @@
                     <a id="js-getcode">GitHub</a>
                 </div>
                 {{ csrf_field() }}
+                @if(!empty($data)){
+                   {{dd($data)}}
+                }
+             @endif
             </div>
         </div>
         <script>
@@ -102,7 +106,11 @@
            getlogin();
         };
         document.getElementById('js-getdata').onclick = function(){
-           gettokenfromurl();
+           @if(!empty($string)){
+             gettokenbypost('{{$string}}');
+
+          }
+          @endif
         };
 
         document.getElementById('js-getcode').onclick = function(){
@@ -116,23 +124,8 @@
            return accesstoken;
         }
 
-        function gettokenbypost(){
-           $.ajax({
-             url: "http://localhost:8089/authenticate",
-
-             data: {
-                '_token': $('[name="somenamehere"]').val(),
-                'code': getcodefromurl(),
-
-             },
-             error: function(){
-                console.log("no response");
-             },
-             success: function(data) {
-                var container = $('#content');
-                console.log(data);
-             }
-          });
+        function gettokenbypost(code){
+           window.location.href = "http://localhost:8089/gettoken/"+code;
         }
 
         function getcodefromurl(){

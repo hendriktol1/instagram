@@ -13,3 +13,4 @@
 
 Route::get('/', 'InstagramController@index');
 Route::get('/user', 'InstagramController@home');
+Route::get('/gettoken/{code}', ['uses' => 'InstagramController@token']);

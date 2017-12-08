@@ -43,6 +43,12 @@ class InstagramController extends Controller
         }
     }
 
+    public function token($code){
+      $instagram = new Instagram;
+      $instagram->new();
+      $token = $instagram->getOAuthToken($code);
+      return $token;
+   }
     /**
      * Show the form for creating a new resource.
      *
